@@ -1,15 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { HelmetProvider } from "react-helmet-async";
+import { store } from "./redux/store";
+import { Provider as ReduxProvider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { ChakraProvider, ColorModeScript, theme } from "@chakra-ui/react";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <HelmetProvider>
+      <ReduxProvider store={store}>
+        <BrowserRouter>
+          <ChakraProvider theme={theme}>
+            <ColorModeScript />
+            <App />
+          </ChakraProvider>
+        </BrowserRouter>
+      </ReduxProvider>
+    </HelmetProvider>
   </React.StrictMode>
 );
 
